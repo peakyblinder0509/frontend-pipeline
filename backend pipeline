@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        EC2_IP = '10.121.15.205'
+    }
+
     stages {
 
         stage('Clone Backend Code') {
@@ -51,7 +55,7 @@ pipeline {
 
     post {
         success {
-            echo "Deployment successful."
+            echo "Deployment successful. App running at http://${EC2_IP}:3000"
         }
         failure {
             echo "Build failed. Check the logs above."
